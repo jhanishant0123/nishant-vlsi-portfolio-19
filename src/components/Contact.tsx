@@ -94,7 +94,7 @@ const Contact = () => {
         <img 
           src="/lovable-uploads/a19fb75c-45c8-4b42-8acd-997b286afd2e.png" 
           alt="LinkedIn" 
-          className="h-6 w-6 object-contain"
+          className="h-8 w-8 object-contain"
         />
       ),
       label: "LinkedIn",
@@ -105,7 +105,7 @@ const Contact = () => {
         <img 
           src="/lovable-uploads/c7afd250-23bd-4d10-a8aa-a8e0111cdb6d.png" 
           alt="GitHub" 
-          className="h-6 w-6 object-contain"
+          className="h-8 w-8 object-contain"
         />
       ),
       label: "GitHub", 
@@ -116,7 +116,7 @@ const Contact = () => {
         <img 
           src="/lovable-uploads/11d8df3a-ba20-4819-8bb8-689734115eab.png" 
           alt="Email" 
-          className="h-6 w-6 object-contain"
+          className="h-8 w-8 object-contain"
         />
       ),
       label: "Email",
