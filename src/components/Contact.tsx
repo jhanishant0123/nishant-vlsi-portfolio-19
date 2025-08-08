@@ -19,6 +19,16 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Basic client-side validation
+    if (!formData.name.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) || !formData.message.trim()) {
+      toast({
+        title: "Please fill out all fields correctly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -34,15 +44,14 @@ const Contact = () => {
       );
 
       toast({
-        title: "Message sent successfully! 🎉",
+        title: "Your message has been sent!",
         description: "Thank you for reaching out. I'll get back to you soon!",
       });
 
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       toast({
-        title: "Failed to send message",
-        description: "Please try again or email me directly.",
+        title: "Failed to send message. Please try again.",
         variant: "destructive",
       });
     } finally {
