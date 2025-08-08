@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
 
@@ -40,7 +40,7 @@ const Contact = () => {
           email: formData.email,
           message: formData.message,
         },
-        'V2OFTOgIZ3oquVADP'
+        'BZ4P0V0_1zjNmdA3R'
       );
 
       toast({
@@ -50,6 +50,7 @@ const Contact = () => {
 
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error("EmailJS Error:", error);
       toast({
         title: "Failed to send message. Please try again.",
         variant: "destructive",
@@ -92,22 +93,40 @@ const Contact = () => {
 
   const socialLinks = [
     {
-      icon: <Linkedin className="h-6 w-6" />,
+      icon: (
+        <img 
+          src="https://drive.google.com/uc?export=view&id=1OoDVTVoe3hEG2a9au4QVlxNvKyKU5mm8" 
+          alt="LinkedIn icon" 
+          className="h-6 w-6"
+          loading="lazy"
+        />
+      ),
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/nishant-jha777/",
-      color: "hover:text-[#0077B5]"
     },
     {
-      icon: <Github className="h-6 w-6" />,
+      icon: (
+        <img 
+          src="https://drive.google.com/uc?export=view&id=1OgJu070XDNvnjdnipBZRqdJUykb-VgeK" 
+          alt="GitHub icon" 
+          className="h-6 w-6"
+          loading="lazy"
+        />
+      ),
       label: "GitHub", 
       href: "https://github.com/jhanishant0123",
-      color: "hover:text-foreground"
     },
     {
-      icon: <Mail className="h-6 w-6" />,
+      icon: (
+        <img 
+          src="https://drive.google.com/uc?export=view&id=1I7UTwiQvfaMnqJkobjoakryRw9FofUx5" 
+          alt="Email icon" 
+          className="h-6 w-6"
+          loading="lazy"
+        />
+      ),
       label: "Email",
       href: "mailto:jhanishant0123@gmail.com",
-      color: "hover:text-primary"
     }
   ];
 
@@ -284,7 +303,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-3 rounded-lg bg-card/30 border border-border hover:border-primary/30 transition-smooth ${social.color}`}
+                    className="p-3 rounded-lg bg-card/30 border border-border hover:border-primary/30 transition-smooth"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
