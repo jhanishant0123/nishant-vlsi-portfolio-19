@@ -1,0 +1,966 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VLSI Portfolio Design System - Dark theme with teal/purple accents
+All colors MUST be HSL.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* VLSI Dark Theme */
+    --background: 220 26% 6%;
+    --foreground: 180 100% 90%;
+
+    --card: 220 26% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 220 26% 8%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 26% 6%;
+
+    --secondary: 270 91% 65%;
+    --secondary-foreground: 220 26% 6%;
+
+    --muted: 220 26% 12%;
+    --muted-foreground: 180 25% 60%;
+
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 26% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 180 100% 90%;
+
+    --border: 220 26% 16%;
+    --input: 220 26% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* VLSI Custom Colors */
+    --primary-glow: 180 100% 60%;
+    --secondary-glow: 270 91% 75%;
+    --circuit-lines: 180 50% 25%;
+    --tech-accent: 180 100% 40%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
+    --gradient-circuit: linear-gradient(180deg, hsl(var(--background)), hsl(220 26% 4%));
+    
+    /* Shadows & Effects */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(220 26% 2%);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 220 26% 8%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode uses same colors as our VLSI theme */
+    --background: 220 26% 6%;
+    --foreground: 180 100% 90%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-glow));
+  }
+}
+
+@layer components {
+  /* VLSI Theme Utilities */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  /* VLSI Circuit Pattern */
+  .circuit-bg {
+    background-image: 
+      linear-gradient(90deg, hsl(var(--circuit-lines)) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--circuit-lines)) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.1;
+  }
+
+  /* 3D Effects for Project Cards */
+  .project-card-3d {
+    transform: perspective(1000px) rotateX(5deg);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 10px 20px rgba(6, 182, 212, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    background: linear-gradient(135deg, 
+      rgba(6, 182, 212, 0.05) 0%, 
+      rgba(0, 0, 0, 0.1) 50%, 
+      rgba(6, 182, 212, 0.05) 100%);
+  }
+
+  .project-card-3d:hover {
+    transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.4),
+      0 15px 30px rgba(6, 182, 212, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Glitter Text Animation */
+  @keyframes glitter {
+    0% { 
+      background-position: 0% 50%; 
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    }
+    25% { 
+      background-position: 25% 50%; 
+      text-shadow: 0 0 20px rgba(255, 215, 0, 1);
+    }
+    50% { 
+      background-position: 50% 50%; 
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+    75% { 
+      background-position: 75% 50%; 
+      text-shadow: 0 0 20px rgba(255, 215, 0, 1);
+    }
+    100% { 
+      background-position: 100% 50%; 
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    }
+  }
+
+  .glitter-text {
+    background: linear-gradient(
+      45deg,
+      #ffd700,
+      #ffed4a,
+      #fbbf24,
+      #f59e0b,
+      #ffd700,
+      #ffed4a,
+      #fbbf24,
+      #f59e0b
+    );
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glitter 2s ease-in-out infinite;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  .glitter-text-yellow {
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFED4A);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+  }
+
+  /* Profile Picture Hover Effects */
+  .profile-pic-container:hover {
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 30px 60px #35141B;
+    border: 2px solid #FFD700;
+    transform: translateZ(20px);
+  }
+
+  /* Futuristic Project Card Styles */
+  .futuristic-project-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glassmorphism-card {
+    background: rgba(6, 182, 212, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+  }
+
+  .project-card-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .shine-overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .futuristic-project-card:hover .shine-overlay {
+    left: 100%;
+  }
+
+  .project-button-3d:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 5px 20px rgba(6, 182, 212, 0.3);
+  }
+
+  /* Experience Box Effects */
+  .exp-box {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .exp-box-1:hover {
+    border-color: hsl(48, 85%, 53%);
+    box-shadow: 0 0 20px hsl(48 85% 53% / 0.5), 0 15px 30px hsl(48 85% 53% / 0.3);
+  }
+
+  .exp-box-1:hover::before {
+    background: linear-gradient(45deg, hsl(48 85% 53% / 0.2), hsl(51 90% 60% / 0.2));
+    transform: translateX(0);
+    animation: sparkle-yellow 1s ease-in-out infinite;
+  }
+
+  .exp-box-2:hover {
+    border-color: hsl(355, 75%, 50%);
+    box-shadow: 0 0 20px hsl(355 75% 50% / 0.5), 0 15px 30px hsl(355 75% 50% / 0.3);
+  }
+
+  .exp-box-2:hover::before {
+    background: linear-gradient(45deg, hsl(355 75% 50% / 0.2), hsl(352 85% 60% / 0.2));
+    transform: translateX(0);
+    animation: sparkle-red 1s ease-in-out infinite;
+  }
+
+  .exp-box-3:hover {
+    border-color: hsl(25, 85%, 53%);
+    box-shadow: 0 0 20px hsl(25 85% 53% / 0.5), 0 15px 30px hsl(25 85% 53% / 0.3);
+  }
+
+  .exp-box-3:hover::before {
+    background: linear-gradient(45deg, hsl(25 85% 53% / 0.2), hsl(28 90% 60% / 0.2));
+    transform: translateX(0);
+    animation: sparkle-orange 1s ease-in-out infinite;
+  }
+
+  /* Education Section Effects */
+  .education-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .education-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(53, 20, 27, 0.8), rgba(53, 20, 27, 0.6));
+    z-index: 1;
+    transition: width 0.3s ease-in-out;
+    pointer-events: none;
+  }
+
+  .education-section:hover::before {
+    width: 100%;
+    animation: glitter-shadow-orange 1s ease-in-out infinite;
+  }
+
+  .education-section::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    z-index: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .education-section:hover::after {
+    border-color: #FF6B35;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
+    animation: sparkle-orange 1s ease-in-out infinite;
+  }
+
+  /* Activity Box Effects */
+  .activity-box {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .activity-box .shine-overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .activity-box:hover .shine-overlay {
+    left: 100%;
+  }
+
+  /* Shine overlay triggers for other sections */
+  .exp-box:hover .shine-overlay,
+  .education-box:hover .shine-overlay,
+  .coursework-box:hover .shine-overlay {
+    left: 100%;
+  }
+  .box-1:hover .icon-container {
+    background-color: #E63946 !important;
+  }
+
+  .box-1:hover svg {
+    color: white !important;
+  }
+
+  .box-1:hover {
+    border-color: #FFC0CB;
+    box-shadow: 0 0 20px rgba(255, 192, 203, 0.6), 0 15px 30px rgba(255, 192, 203, 0.4);
+  }
+
+  .box-2:hover .icon-container {
+    background-color: #F4D35E !important;
+  }
+
+  .box-2:hover svg {
+    color: #E63946 !important;
+  }
+
+  .box-2:hover {
+    border-color: #F4D35E;
+    box-shadow: 0 0 20px rgba(244, 211, 94, 0.6), 0 15px 30px rgba(244, 211, 94, 0.4);
+  }
+
+  .box-3:hover .icon-container {
+    background-color: #264653 !important;
+  }
+
+  .box-3:hover svg {
+    color: #2A9D8F !important;
+  }
+
+  .box-3:hover {
+    border-color: #FF6B35;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6), 0 15px 30px rgba(255, 107, 53, 0.4);
+  }
+
+  /* Keyframe Animations */
+  @keyframes sparkle-orange {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes sparkle-red {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes sparkle-yellow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes glitter-shadow-orange {
+    0%, 100% { box-shadow: 0 0 30px rgba(255, 107, 53, 0.6); }
+    50% { box-shadow: 0 0 50px rgba(255, 107, 53, 0.9); }
+  }
+
+  /* Course filling effects */
+  .course-green::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #10B981, #34D399);
+    z-index: -1;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .course-green:hover::before {
+    width: 100%;
+  }
+
+  .course-yellow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #F59E0B, #FBBF24);
+    z-index: -1;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .course-yellow:hover::before {
+    width: 100%;
+  }
+
+  .course-blue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #3B82F6, #60A5FA);
+    z-index: -1;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .course-blue:hover::before {
+    width: 100%;
+  }
+
+  .course-brown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #92400E, #B45309);
+    z-index: -1;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .course-brown:hover::before {
+    width: 100%;
+  }
+
+  /* Activity hover effects */
+  .activity-star:hover .icon-container {
+    background-color: hsl(0, 84%, 60%) !important;
+  }
+
+  .activity-star:hover svg {
+    fill: white !important;
+    color: white !important;
+  }
+
+  .activity-heart:hover .icon-container {
+    background-color: hsl(48, 96%, 50%) !important;
+  }
+
+  .activity-heart:hover svg {
+    fill: hsl(0, 84%, 60%) !important;
+    color: hsl(0, 84%, 60%) !important;
+  }
+
+  .activity-users:hover .icon-container {
+    background-color: hsl(217, 91%, 60%) !important;
+  }
+
+  .activity-users:hover svg {
+    fill: hsl(142, 71%, 45%) !important;
+    color: hsl(142, 71%, 45%) !important;
+  }
+
+  /* Experience Section Styling */
+  .exp-box {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    will-change: transform, box-shadow;
+  }
+
+  .exp-box:hover {
+    transform: scale(1.05) translateY(-5px);
+  }
+
+  .exp-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: transparent;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  .exp-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    transition: all 0.3s ease;
+    z-index: -2;
+  }
+
+  /* Experience Box 1 - Orange Glittery Glow */
+  .exp-box-1:hover::before {
+    background: linear-gradient(45deg, 
+      hsl(25, 85%, 53%) 0%, 
+      hsl(28, 90%, 60%) 25%, 
+      hsl(25, 85%, 53%) 50%, 
+      hsl(32, 95%, 65%) 75%, 
+      hsl(25, 85%, 53%) 100%);
+    animation: sparkle-orange 0.8s ease-in-out infinite alternate;
+  }
+
+  .exp-box-1:hover::after {
+    box-shadow: 0 25px 50px hsl(25, 85%, 40% / 0.4), 
+                0 15px 30px hsl(25, 85%, 40% / 0.3),
+                inset 0 1px 0 hsl(25, 85%, 60% / 0.2);
+  }
+
+  /* Experience Box 2 - Red Glittery Glow */
+  .exp-box-2:hover::before {
+    background: linear-gradient(45deg, 
+      hsl(355, 75%, 50%) 0%, 
+      hsl(358, 80%, 55%) 25%, 
+      hsl(355, 75%, 50%) 50%, 
+      hsl(352, 85%, 60%) 75%, 
+      hsl(355, 75%, 50%) 100%);
+    animation: sparkle-red 0.8s ease-in-out infinite alternate;
+  }
+
+  .exp-box-2:hover::after {
+    box-shadow: 0 25px 50px hsl(355, 75%, 40% / 0.4), 
+                0 15px 30px hsl(355, 75%, 40% / 0.3),
+                inset 0 1px 0 hsl(355, 75%, 60% / 0.2);
+  }
+
+  /* Experience Box 3 - Dark Yellow Glittery Glow */
+  .exp-box-3:hover::before {
+    background: linear-gradient(45deg, 
+      hsl(48, 85%, 53%) 0%, 
+      hsl(51, 90%, 60%) 25%, 
+      hsl(48, 85%, 53%) 50%, 
+      hsl(45, 95%, 65%) 75%, 
+      hsl(48, 85%, 53%) 100%);
+    animation: sparkle-yellow 0.8s ease-in-out infinite alternate;
+  }
+
+  .exp-box-3:hover::after {
+    box-shadow: 0 25px 50px hsl(48, 85%, 40% / 0.4), 
+                0 15px 30px hsl(48, 85%, 40% / 0.3),
+                inset 0 1px 0 hsl(48, 85%, 60% / 0.2);
+  }
+
+  /* Education Section Styling */
+  .education-box {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .education-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      hsla(210, 85%, 53%, 0.2) 0%, 
+      hsla(213, 90%, 60%, 0.15) 50%, 
+      hsla(210, 85%, 53%, 0.2) 100%);
+    transition: width 0.4s ease;
+    z-index: 1;
+  }
+
+  .education-box:hover::before {
+    width: 100%;
+  }
+
+  .education-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  .education-box:hover::after {
+    box-shadow: 0 25px 50px hsl(48, 85%, 40% / 0.4), 
+                0 15px 30px hsl(48, 85%, 40% / 0.3);
+  }
+
+  .education-box > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Coursework Section Updated Styling */
+  .coursework-box {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .coursework-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: width 0.4s ease;
+    z-index: 0;
+  }
+
+  .coursework-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  .coursework-box > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Coursework Box 1 - Green */
+  .coursework-box-1::before {
+    background: linear-gradient(90deg, 
+      hsla(142, 69%, 58%, 0.2) 0%, 
+      hsla(145, 75%, 65%, 0.15) 50%, 
+      hsla(142, 69%, 58%, 0.2) 100%);
+  }
+
+  .coursework-box-1:hover::before {
+    width: 100%;
+  }
+
+  .coursework-box-1:hover::after {
+    box-shadow: 0 25px 50px hsl(48, 85%, 40% / 0.4), 
+                0 15px 30px hsl(48, 85%, 40% / 0.3);
+  }
+
+  /* Coursework Box 2 - Yellow */
+  .coursework-box-2::before {
+    background: linear-gradient(90deg, 
+      hsla(48, 85%, 53%, 0.2) 0%, 
+      hsla(51, 90%, 60%, 0.15) 50%, 
+      hsla(48, 85%, 53%, 0.2) 100%);
+  }
+
+  .coursework-box-2:hover::before {
+    width: 100%;
+  }
+
+  .coursework-box-2:hover::after {
+    box-shadow: 0 25px 50px hsl(48, 85%, 40% / 0.4), 
+                0 15px 30px hsl(48, 85%, 40% / 0.3);
+  }
+
+  /* Coursework Box 3 - Blue */
+  .coursework-box-3::before {
+    background: linear-gradient(90deg, 
+      hsla(210, 85%, 53%, 0.2) 0%, 
+      hsla(213, 90%, 60%, 0.15) 50%, 
+      hsla(210, 85%, 53%, 0.2) 100%);
+  }
+
+  .coursework-box-3:hover::before {
+    width: 100%;
+  }
+
+  .coursework-box-3:hover::after {
+    box-shadow: 0 25px 50px hsl(48, 85%, 40% / 0.4), 
+                0 15px 30px hsl(48, 85%, 40% / 0.3);
+  }
+
+  /* Coursework Box 4 - Brown */
+  .coursework-box-4::before {
+    background: linear-gradient(90deg, 
+      hsla(25, 60%, 35%, 0.2) 0%, 
+      hsla(28, 65%, 42%, 0.15) 50%, 
+      hsla(25, 60%, 35%, 0.2) 100%);
+  }
+
+  .coursework-box-4:hover::before {
+    width: 100%;
+  }
+
+  .coursework-box-4:hover::after {
+    box-shadow: 0 25px 50px hsl(48, 85%, 40% / 0.4), 
+                0 15px 30px hsl(48, 85%, 40% / 0.3);
+  }
+
+  /* Sparkle Animations */
+  @keyframes sparkle-orange {
+    0% {
+      filter: brightness(1) saturate(1);
+    }
+    50% {
+      filter: brightness(1.2) saturate(1.3);
+    }
+    100% {
+      filter: brightness(1.1) saturate(1.1);
+    }
+  }
+
+  @keyframes sparkle-red {
+    0% {
+      filter: brightness(1) saturate(1);
+    }
+    50% {
+      filter: brightness(1.2) saturate(1.3);
+    }
+    100% {
+      filter: brightness(1.1) saturate(1.1);
+  }
+}
+
+/* ===== interactive card core ===== */
+.card-effect {
+  position: relative;
+  overflow: visible; /* allow glow to show outside the card */
+  transform-origin: center;
+  transition: transform 0.36s ease, box-shadow 0.36s ease;
+  -webkit-backface-visibility: hidden;
+}
+
+/* glass-shine overlay (pseudo-element). slides across on hover */
+.card-effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8; /* above glow, below text layer which will be z-10 */
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.00) 0%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.14) 55%,
+    rgba(255,255,255,0.00) 100%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.85s cubic-bezier(.2,.9,.2,1);
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+}
+
+/* 3D glow behind content (pseudo-element) */
+.card-effect::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 120%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 1; /* behind content and fill */
+  filter: blur(28px) saturate(120%);
+  opacity: 0;
+  transition: opacity 0.36s ease, transform 0.36s ease;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/* hover/focus state reveals the shine + glow and pops the card up */
+.card-effect.hovering,
+.card-effect:focus-within {
+  transform: translateY(-8px) scale(1.03);
+  z-index: 20;
+}
+.card-effect.hovering::before,
+.card-effect:focus-within::before {
+  transform: translateX(130%);
+}
+.card-effect.hovering::after,
+.card-effect:focus-within::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+/* Glow color variants (use these classes on the wrapper) */
+.card-color-orange::after {
+  background: radial-gradient(circle at 50% 40%, rgba(255,140,0,0.30), rgba(255,140,0,0.10) 30%, transparent 60%);
+}
+.card-color-red::after {
+  background: radial-gradient(circle at 50% 40%, rgba(255,40,40,0.28), rgba(255,40,40,0.08) 30%, transparent 60%);
+}
+.card-color-darkyellow::after {
+  background: radial-gradient(circle at 50% 40%, rgba(200,160,20,0.32), rgba(200,160,20,0.10) 30%, transparent 60%);
+}
+
+/* fill overlay for left→right fill animation */
+.card-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* above glow but below content */
+  pointer-events: none;
+}
+.fill-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  transition: width 0.65s cubic-bezier(.2,.9,.2,1);
+  mix-blend-mode: screen;
+  opacity: 0.12; /* low so text remains readable */
+  border-radius: inherit;
+}
+
+/* fill color variants */
+.fill-green { background: linear-gradient(90deg, rgba(30,180,50,0.95), rgba(30,180,50,0.6)); }
+.fill-yellow{ background: linear-gradient(90deg, rgba(225,200,20,0.95), rgba(225,200,20,0.6)); }
+.fill-blue  { background: linear-gradient(90deg, rgba(30,120,240,0.95), rgba(30,120,240,0.6)); }
+.fill-brown { background: linear-gradient(90deg, rgba(120,70,20,0.95), rgba(120,70,20,0.6)); }
+.fill-blue-edu { background: linear-gradient(90deg, rgba(40,110,255,0.95), rgba(40,110,255,0.6)); }
+
+/* Reveal fill when hovering/focusing */
+.card-effect.hovering .fill-bar,
+.card-effect:focus-within .fill-bar {
+  width: 100%;
+}
+
+/* content layer above everything */
+.card-content { position: relative; z-index: 10; }
+
+/* reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  .card-effect, .card-effect::before, .card-effect::after, .fill-bar {
+    transition: none !important; transform: none !important;
+  }
+}
+
+  @keyframes sparkle-yellow {
+    0% {
+      filter: brightness(1) saturate(1);
+    }
+    50% {
+      filter: brightness(1.2) saturate(1.3);
+    }
+    100% {
+      filter: brightness(1.1) saturate(1.1);
+    }
+  }
+}
