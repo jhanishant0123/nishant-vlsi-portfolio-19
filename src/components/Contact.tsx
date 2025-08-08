@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,14 +33,10 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        'service_z8crbwq',
-        'template_2wqdxf6',
-        {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        },
+      await emailjs.sendForm(
+        'service_z8crbwq', 
+        'template_2wqdxf6', 
+        formRef.current as HTMLFormElement, 
         'BZ4P0V0_1zjNmdA3R'
       );
 
@@ -95,10 +92,9 @@ const Contact = () => {
     {
       icon: (
         <img 
-          src="https://drive.google.com/uc?export=view&id=1OoDVTVoe3hEG2a9au4QVlxNvKyKU5mm8" 
-          alt="LinkedIn icon" 
-          className="h-6 w-6"
-          loading="lazy"
+          src="/lovable-uploads/a19fb75c-45c8-4b42-8acd-997b286afd2e.png" 
+          alt="LinkedIn" 
+          className="h-6 w-6 object-contain"
         />
       ),
       label: "LinkedIn",
@@ -107,10 +103,9 @@ const Contact = () => {
     {
       icon: (
         <img 
-          src="https://drive.google.com/uc?export=view&id=1OgJu070XDNvnjdnipBZRqdJUykb-VgeK" 
-          alt="GitHub icon" 
-          className="h-6 w-6"
-          loading="lazy"
+          src="/lovable-uploads/c7afd250-23bd-4d10-a8aa-a8e0111cdb6d.png" 
+          alt="GitHub" 
+          className="h-6 w-6 object-contain"
         />
       ),
       label: "GitHub", 
@@ -119,10 +114,9 @@ const Contact = () => {
     {
       icon: (
         <img 
-          src="https://drive.google.com/uc?export=view&id=1I7UTwiQvfaMnqJkobjoakryRw9FofUx5" 
-          alt="Email icon" 
-          className="h-6 w-6"
-          loading="lazy"
+          src="/lovable-uploads/11d8df3a-ba20-4819-8bb8-689734115eab.png" 
+          alt="Email" 
+          className="h-6 w-6 object-contain"
         />
       ),
       label: "Email",
@@ -169,7 +163,7 @@ const Contact = () => {
                 Send a Message
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -303,7 +297,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-card/30 border border-border hover:border-primary/30 transition-smooth"
+                    className="p-3 rounded-lg bg-card/30 border border-border hover:border-primary/30 transition-smooth flex items-center justify-center"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
