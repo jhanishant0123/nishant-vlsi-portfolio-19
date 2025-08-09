@@ -1,25 +1,28 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
+import linkedinIcon from "@/assets/icons/linkedin-color.png";
+import githubIcon from "@/assets/icons/github-color.png";
+import emailIcon from "@/assets/icons/email-color.png";
 
 const Footer = () => {
   const socialLinks = [
     {
-      icon: <Linkedin className="h-5 w-5" />,
-      href: "https://linkedin.com/in/nishant",
+      icon: <img src={linkedinIcon} alt="LinkedIn" className="h-6 w-6 object-contain" />,
+      href: "https://www.linkedin.com/in/nishant-jha777/",
       label: "LinkedIn",
-      color: "hover:text-[#0077B5]"
+      color: "hover:shadow-lg"
     },
     {
-      icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/nishant",
+      icon: <img src={githubIcon} alt="GitHub" className="h-6 w-6 object-contain" />,
+      href: "https://github.com/jhanishant0123",
       label: "GitHub",
-      color: "hover:text-foreground"
+      color: "hover:shadow-lg"
     },
     {
-      icon: <Mail className="h-5 w-5" />,
+      icon: <img src={emailIcon} alt="Email" className="h-6 w-6 object-contain" />,
       href: "mailto:jhanishant0123@gmail.com",
       label: "Email",
-      color: "hover:text-primary"
+      color: "hover:shadow-lg"
     }
   ];
 
