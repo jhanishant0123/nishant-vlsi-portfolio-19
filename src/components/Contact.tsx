@@ -68,7 +68,7 @@ export default function Contact() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Heading */}
         <div className="text-center mb-10 animate-fade-in">
-          <h2 className="text-6xl md:text-7xl font-extrabold mb-4 leading-tight">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
             <span className="text-white">Let’s </span>
             <span className="text-sky-400">Connect 🤝</span>
           </h2>
@@ -77,49 +77,8 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Left: Socials + Highlight */}
-          <div className="space-y-6">
-            <h3 className="text-3xl font-semibold text-center">Follow Me</h3>
-
-            {/* Icons Row */}
-            <div className="flex items-center justify-center gap-8">
-              <a
-                href="https://www.linkedin.com/in/nishant-jha777/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn profile"
-                className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
-              >
-                <img src={linkedinIcon} alt="LinkedIn" className="h-10 w-10 object-contain drop-shadow" />
-              </a>
-              <a
-                href="https://github.com/jhanishant0123"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub profile"
-                className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
-              >
-                <img src={githubIcon} alt="GitHub" className="h-10 w-10 object-contain drop-shadow" />
-              </a>
-              <a
-                href="mailto:jhanishant0123@gmail.com"
-                aria-label="Send email"
-                className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
-              >
-                <img src={emailIcon} alt="Email" className="h-10 w-10 object-contain drop-shadow" />
-              </a>
-            </div>
-
-            {/* Highlight Paragraph */}
-            <div className="w-full p-5 md:p-6 rounded-lg bg-background/40 border border-yellow-400/20">
-              <p className="text-yellow-400 drop-shadow">
-                I&apos;m always excited to discuss new opportunities in VLSI Design, Collaborate on Innovative projects, or simply connect with fellow engineers in the semiconductor industry.
-              </p>
-            </div>
-          </div>
-
-          {/* Right: Contact Form */}
+        <div className="max-w-3xl mx-auto">
+          {/* Contact Form */}
           <Card className="p-8 bg-card/50 border-border">
             <h3 className="text-3xl font-semibold text-center mb-6">Send Me a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -129,7 +88,7 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="text-black dark:text-black placeholder:text-gray-500"
+                className="text-white placeholder:text-gray-400"
               />
               <Input
                 name="email"
@@ -138,7 +97,7 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="text-black dark:text-black placeholder:text-gray-500"
+                className="text-white placeholder:text-gray-400"
               />
               <Textarea
                 name="message"
@@ -147,7 +106,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="text-black dark:text-black placeholder:text-gray-500 resize-none"
+                className="text-white placeholder:text-gray-400 resize-none"
               />
               <Button type="submit" disabled={isSubmitting} className="w-full">
                 {isSubmitting ? "Sending..." : (
@@ -159,6 +118,47 @@ export default function Contact() {
               </Button>
             </form>
           </Card>
+        </div>
+
+        {/* Follow Me and Highlight moved to bottom */}
+        <div className="mt-12 space-y-6">
+          <h3 className="text-3xl font-semibold text-center">Follow Me</h3>
+
+          {/* Icons Row */}
+          <div className="flex items-center justify-center gap-8">
+            <a
+              href="https://www.linkedin.com/in/nishant-jha777/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
+            >
+              <img src={linkedinIcon} alt="LinkedIn" className="h-10 w-10 object-contain drop-shadow" />
+            </a>
+            <a
+              href="https://github.com/jhanishant0123"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
+            >
+              <img src={githubIcon} alt="GitHub" className="h-10 w-10 object-contain drop-shadow" />
+            </a>
+            <a
+              href="mailto:jhanishant0123@gmail.com"
+              aria-label="Send email"
+              className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
+            >
+              <img src={emailIcon} alt="Email" className="h-10 w-10 object-contain drop-shadow" />
+            </a>
+          </div>
+
+          {/* Highlight Paragraph */}
+          <div className="w-full max-w-4xl mx-auto p-5 md:p-6 rounded-lg bg-background/40 border border-yellow-400/20">
+            <p className="text-yellow-400 drop-shadow text-center">
+              I&apos;m always excited to discuss new opportunities in VLSI Design, Collaborate on Innovative projects, or simply connect with fellow engineers in the semiconductor industry.
+            </p>
+          </div>
         </div>
       </div>
     </section>
