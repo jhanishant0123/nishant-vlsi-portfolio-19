@@ -2,14 +2,30 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
-// InteractiveCard (paste to top of Experience.tsx & Education.tsx or in a shared file)
+// InteractiveCard (shared pattern)
 function InteractiveCard({ children, glowClass = "", fillClass = "", className = "" }: { children: React.ReactNode; glowClass?: string; fillClass?: string; className?: string }) {
   const [hovering, setHovering] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = (x / rect.width) * 100;
+    const py = (y / rect.height) * 100;
+    el.style.setProperty('--mx', `${px}%`);
+    el.style.setProperty('--my', `${py}%`);
+  };
+
   return (
     <motion.div
+      ref={ref}
       tabIndex={0}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       onFocus={() => setHovering(true)}
@@ -17,11 +33,11 @@ function InteractiveCard({ children, glowClass = "", fillClass = "", className =
       onTouchStart={() => setHovering(true)}
       onTouchEnd={() => setHovering(false)}
       className={`card-effect ${hovering ? "hovering" : ""} ${glowClass} ${className} rounded-lg`}
-      whileHover={{ scale: 1.03, y: -6 }}
+      whileHover={{ scale: 1.035, y: -8 }}
       transition={{ type: "tween", duration: 0.32, ease: [0.2, 0.9, 0.2, 1] }}
     >
       <div className="card-fill" aria-hidden="true">
-        <div className={`fill-bar`} />
+        <div className={`fill-bar ${fillClass}`} />
       </div>
 
       <div className="card-content">

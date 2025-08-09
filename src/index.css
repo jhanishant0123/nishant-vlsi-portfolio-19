@@ -844,24 +844,29 @@ All colors MUST be HSL.
   transform-origin: center;
   transition: transform 0.36s ease, box-shadow 0.36s ease;
   -webkit-backface-visibility: hidden;
+  /* cursor-follow variables */
+  --mx: 50%;
+  --my: 50%;
 }
 
-/* glass-shine overlay (pseudo-element). slides across on hover */
+/* glass-shine overlay combines cursor-follow radial with sweep linear */
 .card-effect::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 8; /* above glow, below text layer which will be z-10 */
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.00) 0%,
-    rgba(255,255,255,0.08) 45%,
-    rgba(255,255,255,0.14) 55%,
-    rgba(255,255,255,0.00) 100%
-  );
+  background:
+    radial-gradient(260px circle at var(--mx) var(--my), rgba(255,255,255,0.20), rgba(255,255,255,0.06) 35%, transparent 60%),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.00) 0%,
+      rgba(255,255,255,0.08) 45%,
+      rgba(255,255,255,0.14) 55%,
+      rgba(255,255,255,0.00) 100%
+    );
   transform: translateX(-130%);
-  transition: transform 0.85s cubic-bezier(.2,.9,.2,1);
+  transition: transform 0.85s cubic-bezier(.2,.9,.2,1), background-position 0.12s ease-out;
   mix-blend-mode: overlay;
   border-radius: inherit;
 }
@@ -909,6 +914,20 @@ All colors MUST be HSL.
 .card-color-darkyellow::after {
   background: radial-gradient(circle at 50% 40%, rgba(200,160,20,0.32), rgba(200,160,20,0.10) 30%, transparent 60%);
 }
+.card-color-sky::after {
+  /* sky blue #38BDF8 */
+  background: radial-gradient(circle at 50% 40%, rgba(56,189,248,0.32), rgba(56,189,248,0.10) 30%, transparent 60%);
+}
+.card-color-white::after {
+  background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.35), rgba(255,255,255,0.12) 30%, transparent 60%);
+}
+
+/* outline glow on hover for stronger 3D highlight */
+.card-effect.card-color-orange.hovering { box-shadow: 0 12px 28px hsl(25 90% 55% / 0.22), 0 0 28px hsl(25 90% 55% / 0.55); border-color: hsl(25 90% 55% / 0.55); }
+.card-effect.card-color-red.hovering    { box-shadow: 0 12px 28px hsl(355 75% 50% / 0.22), 0 0 28px hsl(355 75% 50% / 0.55); border-color: hsl(355 75% 50% / 0.55); }
+.card-effect.card-color-darkyellow.hovering { box-shadow: 0 12px 28px hsl(48 85% 53% / 0.22), 0 0 28px hsl(48 85% 53% / 0.55); border-color: hsl(48 85% 53% / 0.55); }
+.card-effect.card-color-sky.hovering    { box-shadow: 0 12px 28px hsl(198 92% 61% / 0.22), 0 0 28px hsl(198 92% 61% / 0.55); border-color: hsl(198 92% 61% / 0.55); }
+.card-effect.card-color-white.hovering  { box-shadow: 0 12px 28px hsl(0 0% 100% / 0.15), 0 0 28px hsl(0 0% 100% / 0.45); border-color: hsl(0 0% 100% / 0.55); }
 
 /* fill overlay for left→right fill animation */
 .card-fill {

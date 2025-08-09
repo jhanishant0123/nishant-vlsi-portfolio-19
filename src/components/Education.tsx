@@ -2,14 +2,30 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { GraduationCap, Award, BookOpen, User } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
-// InteractiveCard (paste to top of Experience.tsx & Education.tsx or in a shared file)
+// InteractiveCard (shared pattern)
 function InteractiveCard({ children, glowClass = "", fillClass = "", className = "" }: { children: React.ReactNode; glowClass?: string; fillClass?: string; className?: string }) {
   const [hovering, setHovering] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = (x / rect.width) * 100;
+    const py = (y / rect.height) * 100;
+    el.style.setProperty('--mx', `${px}%`);
+    el.style.setProperty('--my', `${py}%`);
+  };
+
   return (
     <motion.div
+      ref={ref}
       tabIndex={0}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       onFocus={() => setHovering(true)}
@@ -17,7 +33,7 @@ function InteractiveCard({ children, glowClass = "", fillClass = "", className =
       onTouchStart={() => setHovering(true)}
       onTouchEnd={() => setHovering(false)}
       className={`card-effect ${hovering ? "hovering" : ""} ${glowClass} ${className} rounded-lg`}
-      whileHover={{ scale: 1.03, y: -6 }}
+      whileHover={{ scale: 1.035, y: -8 }}
       transition={{ type: "tween", duration: 0.32, ease: [0.2, 0.9, 0.2, 1] }}
     >
       <div className="card-fill" aria-hidden="true">
@@ -154,20 +170,25 @@ const Education = () => {
             <h3 className="text-2xl font-bold">Relevant Coursework</h3>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {coursework.map((c, idx) => (
-              <InteractiveCard
-                key={c.title}
-                glowClass="card-color-darkyellow"
-                fillClass={
-                  c.colorClass === "coursework-green" ? "fill-green" :
-                  c.colorClass === "coursework-yellow" ? "fill-yellow" :
-                  c.colorClass === "coursework-blue" ? "fill-blue" :
-                  c.colorClass === "coursework-brown" ? "fill-brown" : "fill-blue"
-                }
-                className="p-6 h-full bg-card/50 border border-border transition-smooth relative"
-              >
-                <div className="h-full flex flex-col">
+              <div className="grid md:grid-cols-2 gap-6">
+                {coursework.map((c, idx) => (
+                  <InteractiveCard
+                    key={c.title}
+                    glowClass={
+                      c.colorClass === "coursework-green" ? "card-color-sky" :
+                      c.colorClass === "coursework-yellow" ? "card-color-red" :
+                      c.colorClass === "coursework-blue" ? "card-color-white" :
+                      c.colorClass === "coursework-brown" ? "card-color-darkyellow" : "card-color-sky"
+                    }
+                    fillClass={
+                      c.colorClass === "coursework-green" ? "fill-green" :
+                      c.colorClass === "coursework-yellow" ? "fill-yellow" :
+                      c.colorClass === "coursework-blue" ? "fill-blue" :
+                      c.colorClass === "coursework-brown" ? "fill-brown" : "fill-blue"
+                    }
+                    className="p-6 h-full bg-card/50 border border-border transition-smooth relative"
+                  >
+                    <div className="h-full flex flex-col">
                   {/* Course Header */}
                   <div className="mb-2">
                     <h4 className="font-bold text-lg mb-2">
