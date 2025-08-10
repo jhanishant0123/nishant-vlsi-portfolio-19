@@ -147,7 +147,7 @@ const Projects = () => {
                 ref={(el) => {
                   if (el) projectCardsRef.current[index] = el;
                 }}
-                className="h-full futuristic-project-card glassmorphism-card border-border hover:border-primary/30 transition-smooth overflow-hidden project-card-3d"
+                className={`h-full futuristic-project-card glassmorphism-card border-border hover:border-primary/30 transition-smooth overflow-hidden project-card-3d ${index === 0 ? 'proj-glow-green' : index === 1 ? 'proj-glow-blue' : index === 2 ? 'proj-glow-orange' : 'proj-glow-red'}`}
               >
                 <div className="h-full flex flex-col project-card-inner">
                   <div className="shine-overlay"></div>
