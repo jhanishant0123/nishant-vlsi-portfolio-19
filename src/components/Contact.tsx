@@ -15,6 +15,7 @@ import emailIcon from "@/assets/icons/email-color.png";
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFormHover, setIsFormHover] = useState(false);
   const { toast } = useToast();
 
   const handleChange = (
@@ -79,45 +80,51 @@ export default function Contact() {
 
         <div className="max-w-3xl mx-auto">
           {/* Contact Form */}
-          <Card className="p-8 bg-card/50 border-border">
-            <h3 className="text-3xl font-semibold text-center mb-6">Send Me a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <Input
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="text-white placeholder:text-gray-400"
-              />
-              <Input
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="text-white placeholder:text-gray-400"
-              />
-              <Textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="text-white placeholder:text-gray-400 resize-none"
-              />
-              <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? "Sending..." : (
-                  <>
-                    <Send className="mr-2 h-5 w-5" />
-                    Send Message
-                  </>
-                )}
-              </Button>
-            </form>
-          </Card>
+          <div
+            className={`card-effect card-color-sky no-shine rounded-xl border border-transparent ${isFormHover ? 'hovering' : ''}`}
+            onMouseEnter={() => setIsFormHover(true)}
+            onMouseLeave={() => setIsFormHover(false)}
+          >
+            <Card className="p-8 bg-card/50 border border-border">
+              <h3 className="text-3xl font-semibold text-center mb-6">Send Me a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <Input
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="text-white placeholder:text-gray-400"
+                />
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="text-white placeholder:text-gray-400"
+                />
+                <Textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="text-white placeholder:text-gray-400 resize-none"
+                />
+                <Button type="submit" disabled={isSubmitting} className="w-full">
+                  {isSubmitting ? "Sending..." : (
+                    <>
+                      <Send className="mr-2 h-5 w-5" />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Card>
+          </div>
         </div>
 
         {/* Follow Me and Highlight moved to bottom */}
