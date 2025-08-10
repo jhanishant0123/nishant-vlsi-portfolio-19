@@ -69,7 +69,7 @@ export default function Contact() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Heading */}
         <div className="text-center mb-10 animate-fade-in">
-          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
             <span className="text-white">Let’s </span>
             <span className="text-sky-400">Connect 🤝</span>
           </h2>
@@ -152,11 +152,19 @@ export default function Contact() {
               <img src={githubIcon} alt="GitHub" className="h-10 w-10 object-contain drop-shadow" />
             </a>
             <a
-              href="mailto:jhanishant0123@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=jhanishant0123@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Send email"
               className="p-3 rounded-lg bg-card/30 border border-border transition-transform hover:scale-105 hover:shadow-lg"
+              onClick={(e) => {
+                if (!/Chrome|Firefox/i.test(window.navigator.userAgent)) {
+                  e.preventDefault();
+                  window.location.href = 'mailto:jhanishant0123@gmail.com';
+                }
+              }}
             >
-              <img src={emailIcon} alt="Email" className="h-10 w-10 object-contain drop-shadow" />
+              <img src={emailIcon} alt="Email - Gmail compose" className="h-10 w-10 object-contain drop-shadow" />
             </a>
           </div>
 

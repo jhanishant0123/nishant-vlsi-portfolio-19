@@ -19,10 +19,16 @@ const Footer = () => {
       color: "hover:shadow-lg"
     },
     {
-      icon: <img src={emailIcon} alt="Email" className="h-6 w-6 object-contain" />,
-      href: "mailto:jhanishant0123@gmail.com",
+      icon: <img src={emailIcon} alt="Email - Gmail compose" className="h-6 w-6 object-contain" />,
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=jhanishant0123@gmail.com",
       label: "Email",
-      color: "hover:shadow-lg"
+      color: "hover:shadow-lg",
+      onClick: (e) => {
+        if (!/Chrome|Firefox/i.test(window.navigator.userAgent)) {
+          e.preventDefault();
+          window.location.href = 'mailto:jhanishant0123@gmail.com';
+        }
+      }
     }
   ];
 
@@ -88,6 +94,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-3 rounded-lg bg-background/50 border border-border transition-smooth ${social.color}`}
+                onClick={social.onClick}
                 whileHover={{ 
                   scale: 1.1, 
                   y: -3,
