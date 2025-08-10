@@ -902,6 +902,9 @@ All colors MUST be HSL.
   border-radius: inherit;
 }
 
+/* Disable shine when no-shine modifier present */
+.card-effect.no-shine::before { display: none; }
+
 /* 3D glow behind content (pseudo-element) */
 .card-effect::after {
   content: "";

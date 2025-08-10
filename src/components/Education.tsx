@@ -186,7 +186,7 @@ const Education = () => {
                       c.colorClass === "coursework-blue" ? "fill-blue" :
                       c.colorClass === "coursework-brown" ? "fill-brown" : "fill-blue"
                     }
-                    className="p-6 h-full bg-card/50 border border-border transition-smooth relative"
+                    className="p-6 h-full bg-card/50 border border-border transition-smooth relative no-shine"
                   >
                     <div className="h-full flex flex-col">
                   {/* Course Header */}

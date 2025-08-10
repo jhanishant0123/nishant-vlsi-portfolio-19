@@ -171,7 +171,7 @@ const Experience = () => {
                   >
                     <InteractiveCard
                       glowClass={`${index === 0 ? 'card-color-orange' : index === 1 ? 'card-color-red' : 'card-color-darkyellow'}`}
-                      className={`p-8 bg-card/50 border border-border hover:border-primary/30 transition-smooth relative`}
+                      className={`p-8 bg-card/50 border border-border hover:border-primary/30 transition-smooth relative no-shine`}
                     >
                       {/* Header */}
                       <div className="mb-6">
